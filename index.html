@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.name }} | Data Science Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <div class="logo">{{ data.name }}</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about" class="hero-section container">
+        <div class="hero-content">
+            <h1>Hi, I'm <span class="highlight">{{ data.name }}</span></h1>
+            <h3>{{ data.title }}</h3>
+            <p>{{ data.about }}</p>
+            
+            <div class="social-icons">
+                <a href="{{ data.linkedin }}" target="_blank" class="icon-btn linkedin"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="{{ data.github }}" target="_blank" class="icon-btn github"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="{{ data.name }}">
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                {% for project in data.projects %}
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-chart-network"></i></div>
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.desc }}</p>
+                    <span class="tech-stack"><strong>Tech:</strong> {{ project.tech }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section container">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="contact-sub">Feel free to reach out for collaborations, job opportunities, or just a data science chat!</p>
+        <div class="contact-details">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <p>{{ data.email }}</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>{{ data.location }}</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 {{ data.name }}. Built with Flask & CSS.</p>
+    </footer>
+
+</body>
+</html>
